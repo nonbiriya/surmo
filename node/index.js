@@ -10,7 +10,7 @@ var csvSync = require('csvsync'); // requiring sync module
 //ミドルウエアでstaticパスを追加（ただ、これだけだと直アクセスや無いpathだと動かない）
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.get('/test',function(req,res){
+app.get('/ondodata',function(req,res){
 
     const file = 'ondo.txt';
     let data = fs.readFileSync(file);
