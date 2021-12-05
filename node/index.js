@@ -15,11 +15,17 @@ app.get('/ondodata',function(req,res){
     const file = 'ondo.txt';
     let data = fs.readFileSync(file);
     let ondo_csv = csvSync.parse(data);
-    var ondo_json = {}
+    var ondo_json = []
+    var ondo_temp = {}
     ondo_csv.forEach(surmoMeter => {
         var new_data = {ondo : surmoMeter[1], shitsudo: surmoMeter[2]}
-        ondo_json[surmoMeter[0]] = new_data
+        ondo_temp = { 
+            macAddress : surmoMeter[0],
+            data : new_data
+        }
+        ondo_json[ondo_json.length] = ondo_temp
     });
+    res.header('Content-Type', 'application/json; charset=utf-8')
     res.json(ondo_json)
 });
 
